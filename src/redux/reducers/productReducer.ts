@@ -1,6 +1,7 @@
-import { createSlice,createAsyncThunk,PayloadAction } from "@reduxjs/toolkit";
+import { createSlice,createAsyncThunk } from "@reduxjs/toolkit";
 import { product } from "../../types/product";
 import { Axios } from "axios";
+
 
 
 const initialState:product[] = []
@@ -27,11 +28,27 @@ const productSlice = createSlice({
           
     } ,
     extraReducers : (build) => {
-        build.addCase(fetchAllProducts.fulfilled,(state,action) =>{
+        build.addCase(fetchAllProducts.fulfilled, (state, action) => {
+            if (action.payload && "message" in action.payload) {
+                return state
+            } else if (!action.payload) {
+                return state
+            }
             return action.payload
+            //setState(action.payload)
         })
+        build.addCase(fetchAllProducts.rejected, (state, action) => {
+            console.log("error in fetching data")
+            return state
+        })
+        build.addCase(fetchAllProducts.pending, (state, action) => {
+            console.log("data is loading ...")
+            return state
+        })
+      
     }
-})
+    }
+)
 
 const productReducer = productSlice.reducer
 export default productReducer

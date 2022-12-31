@@ -1,8 +1,14 @@
-import React from 'react'
+import React, { useState } from 'react';
 
-export const header = () => {
-  return (
-    <div><h1>header</h1></div>
-  )
+import { Link } from "react-router-dom";
+import Navbar from './Navbar';
+
+
+const Header = () => {
+ return (
+  <Navbar/>
+ )
+  
 }
 
+export default Header

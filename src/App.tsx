@@ -1,8 +1,15 @@
 import React from 'react'
 
-const App = () => {
+import AppRouter from './AppRouter'
+import Home from './components/home/MainSlider'
+import HomePage from './pages/HomePage'
+
+
+ function App ()  {
   return (
-    <div>App</div>
+    
+   
+     <AppRouter/>
   )
 }
 
