@@ -4,26 +4,26 @@ import { useState, useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../hooks/reduxHook";
 import { Typography } from "@mui/material";
 import LatestProducts from "../components/home/LatestProducts";
-import { fetchAllProducts } from "../redux/reducers/productReducer";
-import products from "../components/product/products";
+import { fetchAllProduct} from "../redux/reducers/productReducer";
+
 
 const HomePage = () => {
   const [toBeSearched, setToBeSearched] = useState("");
   const products = useAppSelector((state) => {
-    return state.productReducer.filter((item) => {
+    return state.productReducer.filter((item:any) => {
       return item.title.toLowerCase().includes(toBeSearched.toLowerCase());
     });
   });
 
   const dispatch = useAppDispatch();
   useEffect(() => {
-    dispatch(fetchAllProducts());
+    dispatch(fetchAllProduct());
   }, []);
 
   return (
     <div>
       <MainSlider />
-      <Typography variant="h6" gutterBottom sx={{ my: 2 }}>
+      <Typography variant="h5" gutterBottom sx={{ my: 2 }}>
         New Products
       </Typography>
       <LatestProducts list={products} />

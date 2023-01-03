@@ -4,7 +4,8 @@ import "swiper/css";
 import "swiper/css/navigation";
 import SwiperCore, { Autoplay, Pagination, Navigation } from "swiper";
 import { ProductList } from '../../types/product';
-import Products from '../product/products';
+
+import ProductBox from '../product/productbox';
 
 
 const LatestProducts = ({list}:ProductList) => {
@@ -24,7 +25,7 @@ const LatestProducts = ({list}:ProductList) => {
         >
         {list.map((product,index)=>(
             <SwiperSlide key={product.id}>
-                <Products info={product} />
+                <ProductBox info={product} />
             </SwiperSlide>
         )
         )}

@@ -9,7 +9,7 @@ category : Category
 images:string[]
 
 }
-export interface CreateProduct{
+export interface addProduct{
     title: string
     description: string
     price: number
@@ -25,3 +25,27 @@ export interface ProductList{
 export interface ProductPagination{
 
 }
+
+export interface modifyProduct{
+    index ?: number | undefined,
+    update: product
+}
+
+export interface Cart extends product{
+    count :number ;
+}
+export interface ProductCreate {
+    title: string;
+    price: number;
+    description: string;
+    categoryId: number;
+    images: string[];
+  }
+
+export interface ProductUpdate{
+    id: number;
+    price: number;
+    title: string;
+    description: string;
+}
+export type SortType = "None" | "Lowest" | "Highest";
