@@ -1,5 +1,5 @@
 import { createSlice,createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
-import { modifyProduct, product, ProductCreate } from "../../types/product";
+import {  modifyProduct, product, ProductCreate } from "../../types/product";
 import axios, { AxiosResponse } from "axios";
 
 
@@ -35,7 +35,7 @@ export const fetchSingleProduct = createAsyncThunk(
 //Add product to server
  export const addProduct = createAsyncThunk(
     "addProductaToServer",
-    async (product: product) => {
+    async (product:ProductCreate ) => {
       try {
         const response: AxiosResponse<product, product> =
           await axios.post("https://api.escuelajs.co/api/v1/products/", product);

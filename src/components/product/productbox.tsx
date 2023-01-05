@@ -1,15 +1,23 @@
-import { Button, Card, CardActions, CardContent, CardMedia, Typography } from '@mui/material'
+import { Button, Card, CardActions, CardContent, CardMedia, Grid, IconButton, Typography } from '@mui/material'
 
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import { ProductDetail } from '../../types/product';
+import { addtoCart } from '../../redux/reducers/cartReducer';
+import { useAppDispatch } from '../../hooks/reduxHook';
+import { useNavigate } from 'react-router';
 
 const ProductBox = ({info}:ProductDetail) => {
  
-
+    const dispatch = useAppDispatch();
+    const navigate = useNavigate();
+ 
   
     return (
     <>
-        <Card sx={{ maxWidth: 345, height: 350, marginBottom: 3 }}>
+        <Card sx={{ maxWidth: 345, height: 350, marginBottom: 3 }} onClick={() =>
+              navigate("/ViewProduct/" + info.id, {
+                state: info,
+              })}>
       <CardMedia
         sx={{ height: 140 }}
         image={info.images[0]}
@@ -27,10 +35,14 @@ const ProductBox = ({info}:ProductDetail) => {
         </Typography>
       </CardContent>
       <CardActions sx={{justifyContent:"center"}}>
-        <Button size="small" variant="outlined" startIcon={<AddShoppingCartIcon />} >Add to Cart</Button>
+        <Button size="small" variant="outlined" startIcon={<AddShoppingCartIcon />}    onClick={() => {
+              dispatch(addtoCart(info));
+            }}
+
+       >Add to Cart</Button>
       </CardActions>
-    </Card>
-       
+     
+    </Card>    
     </>
   )
 }

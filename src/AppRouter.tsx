@@ -5,6 +5,8 @@ import MainRoot from "./pages/MainRoot";
 import ProductPage from "./pages/ProductPage";
 import ProductsPage from "./pages/ProductsPage";
 import ProfilePage from "./pages/ProfilePage";
+import Cart from "./pages/Cart";
+import ViewProduct from "./components/product/viewProduct";
 
 export default function AppRouter():JSX.Element{
     const router = createBrowserRouter([   
@@ -28,6 +30,14 @@ export default function AppRouter():JSX.Element{
                     }
                 ],
             },
+            {
+                path: "cart",
+                element: <Cart />,
+              },
+              {
+                path: "viewProduct/:id",
+                element: <ViewProduct />,
+              },
             {
                 path:"profile",
                 element:<ProfilePage/>

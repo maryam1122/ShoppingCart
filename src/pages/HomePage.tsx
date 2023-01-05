@@ -7,6 +7,7 @@ import LatestProducts from "../components/home/LatestProducts";
 import { fetchAllProduct} from "../redux/reducers/productReducer";
 
 
+
 const HomePage = () => {
   const [toBeSearched, setToBeSearched] = useState("");
   const products = useAppSelector((state) => {
@@ -27,6 +28,7 @@ const HomePage = () => {
         New Products
       </Typography>
       <LatestProducts list={products} />
+      
     </div>
   );
 };

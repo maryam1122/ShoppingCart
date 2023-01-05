@@ -5,3 +5,4 @@ export interface Category{
 }
 
 export type CreateCategory = "Clothes"|"Electronics"|"Furniture"|"Shoes"|"Others"
+export type ProductCategoryType =  "All"| "Clothes"| "Electronics"| "Furniture"| "Shoes"| "Others";

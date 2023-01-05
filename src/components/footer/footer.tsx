@@ -7,7 +7,7 @@ import LinkedInIcon from "@mui/icons-material/LinkedIn";
 
 export default function Footer(): JSX.Element {
   return (
-    <AppBar position="static"  sx={{background: "#063970"}}>
+    <AppBar position="sticky"  sx={{background: "#063970"}} >
       <Box display="flex" justifyContent="space-between" alignItems="center">
         <Box margin="1rem">
           <Typography>&copy; Copyright, Made By Maryam</Typography>
