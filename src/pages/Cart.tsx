@@ -113,7 +113,7 @@ const Cart =()  =>{
             </Typography>
           </GridItem>
           <GridItem>
-            <Button variant="contained">BUY PRODUCTS</Button>
+            <Button variant="contained">Checkout</Button>
           </GridItem>
         </Box>
       </Box>

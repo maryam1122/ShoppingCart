@@ -6,7 +6,7 @@ import { darkTheme } from "./Themes/darkTheme";
 import { lightTheme } from "./Themes/lightTheme";
 import { ThemeProvider } from "@mui/material/styles";
 import { CssBaseline } from "@mui/material";
-import { useAppSelector , useAppDispatch } from './hooks/reduxHook';
+import { useAppSelector} from './hooks/reduxHook';
 
 
 
@@ -15,7 +15,7 @@ import { useAppSelector , useAppDispatch } from './hooks/reduxHook';
    | "dark"
    | "light";
 
- const dispatch = useAppDispatch();
+
   return (
     
    <ThemeProvider theme={mode === "dark" ? darkTheme : lightTheme}>

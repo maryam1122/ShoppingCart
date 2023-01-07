@@ -2,7 +2,7 @@ import React from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import SwiperCore, { Autoplay, Pagination, Navigation } from "swiper";
-import slideImg2 from '../../images/slider-2.png'
+import slideImg2 from '../../images/banner-2.png'
 
 
 export const MainSlider = () => {
@@ -11,9 +11,7 @@ export const MainSlider = () => {
     <Swiper
       autoplay={true}
       speed={1200}
-      slidesPerView={1}
-      onSlideChange={() => console.log("slide change")}
-      onSwiper={(swiper) => console.log(swiper)}
+      slidesPerView={1}  
     >
       <SwiperSlide>
         <img
