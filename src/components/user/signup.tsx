@@ -19,7 +19,7 @@ import {
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 
 import { useAppSelector, useAppDispatch } from "../../hooks/reduxHook";
-import { createUser } from "../../redux/reducers/userReducer";
+import { CreateUser } from "../../redux/reducers/userReducer";
 
 
 
@@ -47,7 +47,7 @@ const handleRegister = () => {
   };
    
   if (avatar) {
-    dispatch(createUser({ image: avatar, user: newUser }));
+    dispatch(CreateUser({ image: avatar, user: newUser }));
   }
   setName("");
   setEmail("");

@@ -15,7 +15,7 @@ import {User , UserloginResponse ,UserLogin,UserInitialState,CreateUserWithFile}
     }
 }
 //create new user with image upload
-export const createUser = createAsyncThunk(
+export const CreateUser = createAsyncThunk(
     "userRegister",
     async({image,user} : CreateUserWithFile) => {
         try {
@@ -120,7 +120,7 @@ const userSlice = createSlice({
           }
           state.currentUser = action.payload;
         })
-        .addCase(createUser.fulfilled, (state, action) => {
+        .addCase(CreateUser.fulfilled, (state, action) => {
           if (action.payload) {
             state.userList.push(action.payload);
           }

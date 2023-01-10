@@ -3,7 +3,7 @@ import { UserRole } from '../../types/user'
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import {toast} from "react-hot-toast";
-import { createUser } from '../../redux/reducers/userReducer';
+import { CreateUser } from '../../redux/reducers/userReducer';
 import { useAppDispatch } from '../../hooks/reduxHook';
 
 
