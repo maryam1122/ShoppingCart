@@ -3,7 +3,7 @@ import { styled, alpha } from "@mui/material/styles";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import AccountCircle from "@mui/icons-material/AccountCircle";
 import SearchIcon from "@mui/icons-material/Search";
-import logo from '../../images/logo-2.jpg';
+import logo from '../../images/logo.jpg';
 import ModeNightIcon from "@mui/icons-material/ModeNight";
 import LightModeIcon from "@mui/icons-material/LightMode";
 
@@ -25,6 +25,8 @@ import { Link, useNavigate } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../hooks/reduxHook";
 import { toggleThemeMode } from "../../redux/reducers/themeReducer";
 import { useEffect, useState } from "react";
+import { userLogout } from "../../redux/reducers/userReducer";
+
 
 const Header = () => {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
@@ -35,6 +37,15 @@ const Header = () => {
     { name: "Product", link: "products" },
    
   ];
+
+  const mode = useAppSelector((state) => state.themeReducer) as
+  | "dark"
+  | "light";
+
+
+const toggleTheme = () => {
+  dispatch(toggleThemeMode());
+};
   const handleProfileMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
   };
@@ -42,18 +53,20 @@ const Header = () => {
     setAnchorEl(null);
   };
 
-  const mode = useAppSelector((state) => state.themeReducer) as
-    | "dark"
-    | "light";
-
-  const dispatch = useAppDispatch();
-  const toggleTheme = () => {
-    dispatch(toggleThemeMode());
-  };
+ 
 
   const cart = useAppSelector((state) => state.cartReducer);
   const [cartItems, setCartItems] = useState<number>(0);
   const navigate = useNavigate();
+  const dispatch = useAppDispatch();
+  const user = useAppSelector((state) => state.userReducer.currentUser)
+
+  const isLogin = localStorage.getItem("loggedInUser");
+  console.log(isLogin)
+  const handleLogOut = () => {
+    dispatch(userLogout());
+    navigate("/Signin");
+  };
   
   useEffect(() => {
     let count = 0;
@@ -62,8 +75,9 @@ const Header = () => {
     });
     setCartItems(count);
   }, [cart]);
+  
 
-
+  
   const renderMenu = (
     <Menu
       sx={{ mt: "45px" }}
@@ -80,66 +94,41 @@ const Header = () => {
       }}
       open={isMenuOpen}
       onClose={handleMenuClose}
-    >
-      <MenuItem onClick={handleMenuClose}>
-        <Link className="menu-subitem" to="#">
-          Profile
-        </Link>
-      </MenuItem>
-      <MenuItem onClick={handleMenuClose}>
+    > 
+    { !isLogin ? ( 
+       
+       <>
+       <MenuItem onClick={handleMenuClose}>
         <Link className="menu-subitem" to="/register">
           Create an account
         </Link>
       </MenuItem>
       <MenuItem onClick={handleMenuClose}>
-        <Link className="menu-subitem" to="/login">
+        <Link className="menu-subitem" to="/Signin">
           Sign In
         </Link>
-      </MenuItem>
+      </MenuItem></>) : (
+      <>
+    
+       <MenuItem onClick={handleMenuClose}>
+      <Link className="menu-subitem" to="/profile">
+        Profile
+      </Link>
+    
+    </MenuItem>
+    <MenuItem onClick={() => handleLogOut()}>
+                  Log out
+                </MenuItem></>
+    
+      
+     )}
+      
     </Menu>
   );
 
-  const Search = styled("div")(({ theme }) => ({
-    position: "relative",
-    borderRadius: theme.shape.borderRadius,
-    backgroundColor: alpha(theme.palette.common.white, 0.15),
-    "&:hover": {
-      backgroundColor: alpha(theme.palette.common.white, 0.25),
-    },
-    marginRight: theme.spacing(2),
-    marginLeft: 0,
-    width: "100%",
-    [theme.breakpoints.up("sm")]: {
-      marginLeft: theme.spacing(3),
-      width: "auto",
-    },
-  }));
+  
 
-  const SearchIconWrapper = styled("div")(({ theme }) => ({
-    padding: theme.spacing(0, 2),
-    height: "100%",
-    position: "absolute",
-    pointerEvents: "none",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-  }));
-
-  const StyledInputBase = styled(InputBase)(({ theme }) => ({
-    color: "inherit",
-    "& .MuiInputBase-input": {
-      padding: theme.spacing(1, 1, 1, 0),
-      paddingLeft: `calc(1em + ${theme.spacing(4)})`,
-      transition: theme.transitions.create("width"),
-      width: "100%",
-      [theme.breakpoints.up("md")]: {
-        width: "20ch",
-        "&:focus": {
-          width: "30ch",
-        },
-      },
-    },
-  }));
+  
 
   return (
     <Box sx={{ flexGrow: 1 }}>
@@ -186,15 +175,7 @@ const Header = () => {
               ))}
             </Box>
 
-            <Search>
-              <SearchIconWrapper>
-                <SearchIcon />
-              </SearchIconWrapper>
-              <StyledInputBase
-                placeholder="Search…"
-                inputProps={{ "aria-label": "search" }}
-              />
-            </Search>
+           
 
             <Box sx={{ display: { xs: "none", md: "flex" } }}>
               <IconButton
@@ -224,7 +205,8 @@ const Header = () => {
               <ShoppingCartIcon />
             </Badge>
           </IconButton>
-              <IconButton
+
+              <IconButton 
                 size="large"
                 edge="end"
                 aria-label="account of current user"
@@ -232,8 +214,18 @@ const Header = () => {
                 aria-haspopup="true"
                 onClick={handleProfileMenuOpen}
                 color="inherit"
-              >
-                <AccountCircle />
+                
+              > 
+              {!isLogin ? <AccountCircle />   : <> 
+              {user && (
+                <img
+                  key={user.id}
+                  className="avatar-pic"
+                  src={user.avatar}
+                  alt="user-avatar"
+                />
+              )}
+  </>}
               </IconButton>
             </Box>
           </Toolbar>

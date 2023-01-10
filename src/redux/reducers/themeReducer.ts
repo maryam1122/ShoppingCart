@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { PaletteMode } from '@mui/material';
+
 
 const modeState: string = 'light'
 document.body.className = "body-"+ modeState

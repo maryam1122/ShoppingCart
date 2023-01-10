@@ -39,27 +39,13 @@ const dispatch = useAppDispatch();
     <Box marginTop={20} marginLeft={4} marginRight={4}>
     <Grid container spacing={2}>
       <Grid item xs={12} md={5} sx={{ width: "100%", height: "100%" }}>
-        <Swiper
-          modules={[EffectCube, Navigation, Pagination]}
-          navigation={true}
-          pagination={{ clickable: true }}
-          grabCursor={true}
-          effect="cube"
-          centeredSlides
-        >
-          {product.images.map((item, index) => {
-            return (
-              <SwiperSlide key={index}>
+        
                 <Box
                   component="img"
-                  src={item}
-                  alt={"Error Loading the Image"}
+                  src={product?.images[0]} alt={product?.title} 
                   sx={{ width: "100%", height: 400 }}
                 ></Box>
-              </SwiperSlide>
-            );
-          })}
-        </Swiper>
+               
       </Grid>
       <Grid item xs={12} md={7} sx={{ width: "100%", height: "100%" }}>
         <GridItem>

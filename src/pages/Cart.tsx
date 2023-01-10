@@ -14,6 +14,8 @@ import {
 import { useAppDispatch , useAppSelector } from "../hooks/reduxHook";
 import { addtoCart, removeFromCart } from "../redux/reducers/cartReducer";
 import GridItem from "../Themes/gridTheme";
+import { directive } from "@babel/types";
+import { width } from "dom7";
   
 const Cart =()  =>{
     const cartlistitems = useAppSelector((state) => state.cartReducer);
@@ -43,7 +45,7 @@ const Cart =()  =>{
                         <Typography
                           variant="inherit"
                           sx={{ fontSize: 16, fontWeight: 700 }}
-                          color="secondary"
+                          color="primary"
                         >
                           {item.price} <EuroIcon sx={{ fontSize: 12 }} />
                         </Typography>
@@ -82,8 +84,8 @@ const Cart =()  =>{
                       Total Price:
                       <Typography
                         variant="inherit"
-                        sx={{ fontSize: 16, fontWeight: 700 }}
-                        color="secondary"
+                        sx={{ fontSize: 16, fontWeight: 700,  }}
+                        color="primary"
                       >
                         {item.price * item.count}{" "}
                         <EuroIcon sx={{ fontSize: 12 }} />
@@ -95,25 +97,32 @@ const Cart =()  =>{
             </Box>
           );
         })}
-        <Box>
-          <GridItem>
-            <Typography variant="h6">Total Price</Typography>
-            <Divider />
-          </GridItem>
-          <GridItem>
-            <Typography
-              variant="inherit"
-              sx={{ fontSize: 16, fontWeight: 700 }}
-              color="secondary"
-            >
+        <Box sx={{
+                            display: "flex",
+                            alignItems: "center",
+                            justifyContent: 'space-around' ,
+                            width:'200'
+                            
+                            
+                          }}>
+          <GridItem >
+            <Typography variant="h6" sx={{ fontSize: 16, fontWeight: 700 }}
+              color="primary">Total:
+           
               {cartlistitems.reduce(function (acc, item) {
                 return acc + item.price * item.count;
               }, 0)}{" "}
               <EuroIcon sx={{ fontSize: 12 }} />
             </Typography>
+            
+            
+           
           </GridItem>
+        
+            
+          
           <GridItem>
-            <Button variant="contained">Checkout</Button>
+            <Button variant="contained" >Checkout</Button>
           </GridItem>
         </Box>
       </Box>

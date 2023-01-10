@@ -1,5 +1,5 @@
 import React from 'react'
-import { userRole } from '../../types/user'
+import { UserRole } from '../../types/user'
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import {toast} from "react-hot-toast";

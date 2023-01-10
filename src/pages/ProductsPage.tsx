@@ -15,7 +15,7 @@ const ProductsPage = () => {
   const dispatch = useAppDispatch();
   useEffect(() => {
     dispatch(fetchAllProduct());
-  }, []);
+  }, [fetchAllProduct]);
 
   return (
     <><Products/></>

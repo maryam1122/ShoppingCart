@@ -47,7 +47,7 @@ export const fetchSingleProduct = createAsyncThunk(
   );
 //Modify product on server 
 
-export const updateItemServer = createAsyncThunk(
+export const updateproduct = createAsyncThunk(
   "modifyProductonServer",
   async (Item: product, { dispatch }) => {
     try {
@@ -69,7 +69,7 @@ export const updateItemServer = createAsyncThunk(
 );
 //Delete product on server
 
-export const deleteItemServer = createAsyncThunk(
+export const deleteproduct = createAsyncThunk(
   "deleteProduct",
   async (id: number, { dispatch }) => {
     try {
@@ -157,7 +157,7 @@ const productSlice = createSlice({
           }
         );
         build.addCase(
-          updateItemServer.fulfilled,
+          updateproduct.fulfilled,
           (state: product[], action) => {
             const index = state.findIndex((item) => item.id === action.payload.id);
             state[index] = action.payload;

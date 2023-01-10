@@ -15,7 +15,7 @@ import {
 import { useEffect, useState } from "react";
 import { useAppSelector } from '../../hooks/reduxHook';
 import SearchIcon from "@mui/icons-material/Search";
-import { Container } from "@mui/system";
+import { Container } from "@mui/material";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 import NavigateBeforeIcon from "@mui/icons-material/NavigateBefore";
 
@@ -45,7 +45,7 @@ const Products = () => {
   const pages_no = getPagesNo(productList.length, ItemsInPage);
   const navigate = useNavigate();
 
-  const filterItemsHandler = () => {
+  const filterproducts = () => {
     setCurrentPage(1);
     const id = getCategoryId(list);
     let productSearch = products.filter((item) =>
@@ -77,19 +77,50 @@ const Products = () => {
   }, [products]);
   return (
     <Container sx={{ marginTop: 15 }}>
+      <Paper
+        sx={{
+          p: "0px 4px",
+          display: "flex",
+          alignItems: "center",
+          width: 800,
+          height: 50,
+          mx: 'auto'
+
+        }}
+        variant="outlined"
+        color="inherit"
+      >
+        <InputBase
+          sx={{ flex: 1, p: 2 }}
+          placeholder="Find Products"
+          onChange={(e) => setSearch(e.target.value)}
+        />
+        <Divider
+          sx={{ height: 1, m: 0.5, borderWidth: 1 }}
+          orientation="vertical"
+        />
+        <IconButton
+          type="button"
+          aria-label="search"
+          onClick={(e) => filterproducts()}
+        >
+          <SearchIcon />
+        </IconButton>
+      </Paper>
     <Box
       component="form"
       sx={{
         "& .MuiTextField-root": { m: 1, width: "25ch" },
         display: "flex",
-        justifyContent: "center",
+        justifyContent: "space-around",
         alignItems: "baseline",
+        flexDirection: 'column'
       }}
       noValidate
       autoComplete="off"
     >
       <TextField
-        id="products__sort-price"
+        id="products_price_sort"
         select
         size="small"
         style={{ width: 120 }}
@@ -138,35 +169,9 @@ const Products = () => {
           </MenuItem>
         ))}
       </TextField>
-      <Paper
-        sx={{
-          p: "0px 4px",
-          display: "flex",
-          alignItems: "center",
-          width: 400,
-          height: 40,
-        }}
-        variant="outlined"
-      >
-        <InputBase
-          sx={{ flex: 1, p: 2 }}
-          placeholder="Products"
-          onChange={(e) => setSearch(e.target.value)}
-        />
-        <Divider
-          sx={{ height: 1, m: 0.5, borderWidth: 1 }}
-          orientation="vertical"
-        />
-        <IconButton
-          type="button"
-          aria-label="search"
-          onClick={(e) => filterItemsHandler()}
-        >
-          <SearchIcon />
-        </IconButton>
-      </Paper>
+      
     </Box>
-
+    
     <Grid container spacing={3} m={2} p={2}>
       {productList
         .slice((currentPage - 1) * 9, (currentPage - 1) * 9 + 9)

@@ -6,6 +6,8 @@ import ProductsPage from "./pages/ProductsPage";
 import ProfilePage from "./pages/ProfilePage";
 import Cart from "./pages/Cart";
 import ViewProduct from "./components/product/viewProduct";
+import Signup from "./components/user/signup";
+import Signin from "./components/user/signin";
 
 
 
@@ -33,6 +35,16 @@ export default function AppRouter():JSX.Element{
                 path: "cart",
                 element: <Cart />,
               },
+              {
+                path: "register",
+                element: <Signup />,
+              },
+              {
+                path: "Signin",
+                element: <Signin />,
+              },
+             
+
               {
                 path: "viewProduct/:id",
                 element: <ViewProduct />,
